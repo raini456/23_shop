@@ -4,13 +4,12 @@ class Address {
   private $street;
   private $zip;
   private $city;
-  private $aid;
   private static $amount = 0;
 
-  public function __construct($street, $zip, $city) {
-    $this->street = filter_var($street, FILTER_SANITIZE_STRING);
-    $this->zip = filter_var($zip, FILTER_SANITIZE_NUMBER_INT);
-    $this->city = filter_var($city, FILTER_SANITIZE_STRING);
+  public function __construct(string $street, string $zip, string $city) {
+    $this->street($street);
+    $this->zip($zip);
+    $this->city($city);
     self::$amount++;
   }
 
@@ -46,6 +45,10 @@ class Address {
     if (is_string($city)) {
       $this->city = $city;
     }
+  }
+  
+  public function addressLine(){
+    return $this->street().';'.$this->zip().';'.$this->city();
   }
 
 }

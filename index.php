@@ -1,10 +1,17 @@
 <?php
 require_once './classes/Customer.php';
 require_once './classes/Address.php';
-$address=new Address("Rapperbahn 1", 20888, "Hamburg");
-$customer=new Customer('Rudi','Ratlos', $address);
+$adr=new Address("Rapperbahn 1", 20888, "Hamburg");
+$c=new Customer('Rudi','Ratlos', clone($adr));
+$adrC=$c->address();
+//var_dump($adrC);
+echo "Der Kunde ".$c->firstName()." ".$c->lastName()." wohnt in:<br>".$adrC->street();
+echo "<br>".$adrC->zip();
+echo " ".$adrC->city();
+echo "<br>".$adrC->addressLine();
+$completeAdr=nl2br($c->formatedAddress());
 
-echo $address->street();
+echo "<br>".$completeAdr;
 ?>
 <!DOCTYPE html>
 <html>
