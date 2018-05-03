@@ -1,31 +1,37 @@
 <?php
-
 /**
- * Description of Customer
- *
- * @author pr04
+ * Customer-Klasse mit Vor- und Nachname, Kunden-ID und Artikel-ID sowie eine statische Zählvariable
  */
 class Customer {
 
   private $firstName;
   private $lastName;
+  private $address;
   private $cid;
   private $aid;
-  public static $amount = 0;
+  private static $amount = 0;
 
-  public function __construct($firstName, $lastName) {
-    $this->firstName = filter_var($firstName, FILTER_SANITIZE_STRING);
-    $this->lastName = filter_var($lastName, FILTER_SANITIZE_STRING);
+  public function __construct($firstName, $lastName, Address $address) {
+    $this->firstName($firstName);
+    $this->lastName($lastName);
+    $this->address($address);
     self::$amount++;
-    $this->cid=$this->addCustomer($this->firstName, $this->lastName);
+    /* bzw.     
+     * Customer::$amount++;
+     */
+    $this->cid = $this->addCustomer($this->firstName, $this->lastName);
+  }
+
+  public static function getAmount() {
+    return self::$amount;
+  }
+  public static function find($params) {
+    
   }
   
-  public function addCustomer(){
-    return;//$this->cid;
-  }
-  public function addAdress($s,$z,$c,$country){
-    //$this->cid;
-  }
+  public function addCustomer() {
+    return; //lastInsertID;
+  }  
 
   public function firstName($param = NULL) {
     if ($param === NULL) {
@@ -46,13 +52,13 @@ class Customer {
       $this->lastName = $name;
     }
   }
+  public function address($param=NULL) {
+    if ($param === NULL) {
+      return $this->address;
+    }    
+    if (is_object($param)) {
+      $this->address = $param;
+    }    
+  }
 
 }
-
-$c = new Customer("Olle", "Bolle");
-$c2 = new Customer("Willi", "Wonka");
-$c2->addAdress('street','zip','city', 'country');
-echo $c->firstName() . " " . $c->lastName()."<br>";
-echo $c2->firstName() . " " . $c2->lastName()."<br>";
-echo 'Anzahl angelegter Kunden: '.$c::$amount;
-echo '<br>- oder aber - Anzahl angelegter Kunden: '.Customer::$amount;

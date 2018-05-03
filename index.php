@@ -1,3 +1,11 @@
+<?php
+require_once './classes/Customer.php';
+require_once './classes/Address.php';
+$address=new Address("Rapperbahn 1", 20888, "Hamburg");
+$customer=new Customer('Rudi','Ratlos', $address);
+
+echo $address->street();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,54 +25,43 @@
                 <div class="col-12 col-lg-10 col-md-10 col-sm-10 col-xl-10 bg-light pt-5 pb-5">
                     <h2>Shop</h2>
                     <hr>
-                    <div id="output">MyOutput</div>
+                    <div id="output">Kundenname</div>
                     <hr>
-                    <label for="firstName">Vorname
+                    <label for="firstName">Vorname<br>
                         <input type="text" name="firstName" id="firstName">
                     </label>
-                    <label for="lastName">Nachname
+                    <label for="lastName">Nachname<br>
                         <input type="text" name="lastName" id="lastName">
                     </label>
-                    <label for="streetName">Straße und Hausnummer
+                    <!--label for="streetName">Straße und Hausnummer<br>
                         <input type="text" name="steetName" id="streetName">
                     </label>
-                    <label for="cityName">Ort
+                    <label for="cityName">Ort<br>
                         <input type="text" name="cityName" id="cityName">
                     </label>
-                    <label for="email">Email
+                    <label for="email">Email<br>
                         <input type="text" name="email" id="email">
                     </label>
-                    <label for="phone">Telefon
+                    <label for="phone">Telefon<br>
                         <input type="text" name="phone" id="phone">
                     </label>
-                    <label for="socMed1">Social Media
+                    <label for="socMed1">Social Media 1<br>
                         <input type="text" name="socMed1" id="socMed1">
                     </label>
-                    <label for="socMed2">Social Media 2
+                    <label for="socMed2">Social Media 2<br>
                         <input type="text" name="socMed2" id="socMed2">
                     </label>
-                    <label for="cityName">Ort
-                        <input type="text" name="cityName" id="cityName">
-                    </label>
-                    <!--button class="btn btn-outline-dark">getData</button>
-                    <button class="btn btn-outline-dark bg-warning" value="Berlin">Berlin/Germany</button>
-                    <button class="btn btn-outline-dark bg-primary" value="Phuket">Phuket/Thailand</button>
-                    <button class="btn btn-outline-dark bg-warning" value="Palma">Palma/Mallorca</button>
-                    <button class="btn btn-outline-dark bg-primary" value="Santorini">Santorini/Greece</button-->
+                    <label for="notice">Anmerkungen<br>
+                        <textarea name="notice" id="notice"></textarea>
+                    </label-->
+                    <button class="btn btn-outline-info" id="insert">Eintragen</button>                    
                 </div>                
             </div>
         </div>
+        <?php          
+        ?>
         <script>
-          (function () {
-//              var btns = [];
-//              btns = document.querySelectorAll('button');
-//              var output = document.querySelector('#output');
-//              for (var i = 0; i < btns.length; i++) {
-//                  //var btn[i] = document.querySelector('button'); //ermöglicht die Verwendung von CSS-Selektoren wie # und .
-//
-//                  btns[i].addEventListener('click', ajaxPost);
-//              }              
-          })();
+          
         </script>
     </body>
 </html>
