@@ -1,8 +1,16 @@
 <?php
+require_once './config.php';
+require_once './classes/DbClass.php';
+require_once './classes/DbClassExt.php';
 require_once './classes/Customer.php';
 require_once './classes/Address.php';
-$adr=new Address("Rapperbahn 1", 20888, "Hamburg");
+$db = new DbClassExt('mysql:host=' . HOST . ';dbname=' . DB, USER, PASSWORD);
+if($db){
+  echo "Ah Ja!<br>";
+}
+$adr=new Address("Rapperbahn 1", '20888', "Hamburg");
 $c=new Customer('Rudi','Ratlos', clone($adr));
+$c->insert($db);
 $adrC=$c->address();
 //var_dump($adrC);
 echo "Der Kunde ".$c->firstName()." ".$c->lastName()." wohnt in:<br>".$adrC->street();

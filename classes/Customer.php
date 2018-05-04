@@ -30,8 +30,16 @@ class Customer {
     
   }
 
-  public function addCustomer() {
+  public function insert(DbClassExt $db) {
+    
+  }
+
+  private function addCustomer() {
     return; //lastInsertID;
+  }
+
+  private function addAddress() {
+    
   }
 
   public function firstName($param = NULL) {
@@ -63,13 +71,9 @@ class Customer {
     }
   }
 
-  public function formatedAddress(){
-    return sprintf("%s %s \n%s\n%s %s", 
-            $this->firstName(), 
-            $this->lastName(), 
-            $this->address->street(), 
-            $this->address->zip(),
-            $this->address->city()
-            );
+  public function formatedAddress() {
+    return sprintf("%s %s \n%s\n%s %s", $this->firstName(), $this->lastName(), $this->address->street(), $this->address->zip(), $this->address->city()
+    );
   }
+
 }
