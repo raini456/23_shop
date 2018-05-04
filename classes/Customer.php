@@ -1,79 +1,89 @@
 <?php
 
-/**
- * Customer-Klasse mit Vor- und Nachname, Kunden-ID und Artikel-ID sowie eine statische Zählvariable
- */
 class Customer {
 
-  private $firstName;
-  private $lastName;
-  private $address;
-  private $cid;
-  private static $amount = 0;
+ private $firstname;
+ private $lastname;
+ private $address;
+ private static $amount;
+ private $db;
 
-  public function __construct(string $firstName, string $lastName, Address $address) {
-    $this->firstName($firstName);
-    $this->lastName($lastName);
-    $this->address($address);
-    self::$amount++;
-    /* bzw.     
-     * Customer::$amount++;
-     */
-    $this->cid = $this->addCustomer($this->firstName, $this->lastName);
-  }
+ public function __construct(string $firstname, string $lastname, Address $address) {
+  $this->firstname($firstname);
+  $this->lastname($lastname);
+  $this->address($address);
+//  $this->addCustomer();
+//  self::$amount++;
+ }
 
-  public static function getAmount() {
-    return self::$amount;
-  }
+ public static function find(DbClassExt $db, $param) {
+  $db->setTable('tb_customers');
+  $param = trim($param);
+  $db->setWhere("lastname='$param' OR firstname='$param'");
+  return $db->getData();
+ }
 
-  public static function find($params) {
-    
-  }
+ public function insert(DbClassExt $db) {
+  $this->db = $db;
+  $cid = $this->addCustomer(); //$cid = lastid
+  $this->addAddress($cid);
+ }
 
-  public function insert(DbClassExt $db) {
-    
-  }
+ private function addCustomer() {
+  $this->db->setTable('tb_customers');
+  $data = [];
+  //$data[columnName] = value
+  $data['firstname'] = $this->firstname();
+  $data['lastname'] = $this->lastname();
+  return $this->db->insert($data); //return lastID
+ }
 
-  private function addCustomer() {
-    return; //lastInsertID;
-  }
+ private function addAddress(int $cid) {
+  $this->db->setTable('tb_addresses');
+  $data = [];
+  $data['cid'] = $cid;
+  $data['street'] = $this->address->street();
+  $data['zip'] = $this->address->zip();
+  $data['city'] = $this->address->city();
+  return $this->db->insert($data); //return lastID
+ }
 
-  private function addAddress() {
-    
-  }
+ public static function getAmount() {
+  return self::$amount;
+ }
 
-  public function firstName($param = NULL) {
-    if ($param === NULL) {
-      return $this->firstName;
-    }
-    $name = filter_var($param, FILTER_SANITIZE_STRING);
-    if (is_string($name)) {
-      $this->firstName = $name;
-    }
+ public function lastname($param = NULL) {
+  if ($param === NULL) {
+   return $this->lastname;
   }
+  $name = filter_var($param, FILTER_SANITIZE_STRING);
+  if (is_string($name)) {
+   $this->lastname = $name;
+  }
+ }
 
-  public function lastName($param = NULL) {
-    if ($param === NULL) {
-      return $this->lastName;
-    }
-    $name = filter_var($param, FILTER_SANITIZE_STRING);
-    if (is_string($name)) {
-      $this->lastName = $name;
-    }
+ public function firstname($param = NULL) {
+  if ($param === NULL) {
+   return $this->firstname;
   }
+  $name = filter_var($param, FILTER_SANITIZE_STRING);
+  if (is_string($name)) {
+   $this->firstname = $name;
+  }
+ }
 
-  public function address($param = NULL) {
-    if ($param === NULL) {
-      return $this->address;
-    }
-    if (is_object($param)) {
-      $this->address = $param;
-    }
+ public function address($o = NULL) {
+  if ($o === NULL) {
+   return $this->address;
   }
+  if (is_object($o)) {
+   $this->address = clone($o);
+  }
+ }
 
-  public function formatedAddress() {
-    return sprintf("%s %s \n%s\n%s %s", $this->firstName(), $this->lastName(), $this->address->street(), $this->address->zip(), $this->address->city()
-    );
-  }
+ public function formatedAddress() {
+  return sprintf("%s %s\n%s\n%s %s", $this->firstname(), $this->lastname(), $this->address->street(), $this->address->zip(), $this->address->city()
+  );
+ }
 
 }

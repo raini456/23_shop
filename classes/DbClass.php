@@ -2,9 +2,9 @@
 
 class DbClass extends PDO {
 
- private $tableName = '';
+ protected $tableName = '';
 
- public function setTable($tn) {
+ public function setTable($tn) {   
   $this->tableName = $tn;
  }
 
@@ -45,6 +45,7 @@ class DbClass extends PDO {
    $st->bindValue(++$i, $value);
   }
   $st->execute();
+  return $this->lastInsertId();
  }
 
  public function update($data, $valWhere, $colWhere = 'id') {

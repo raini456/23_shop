@@ -4,22 +4,38 @@ require_once './classes/DbClass.php';
 require_once './classes/DbClassExt.php';
 require_once './classes/Customer.php';
 require_once './classes/Address.php';
-$db = new DbClassExt('mysql:host=' . HOST . ';dbname=' . DB, USER, PASSWORD);
-if($db){
+require_once './classes/Product.php';
+require_once './classes/Label.php';
+
+try {
+  $db = new DbClassExt('mysql:host=' . HOST . ';dbname=' . DB, USER, PASSWORD);  
+} catch (PDOException $exc) {
+  echo $exc->getTraceAsString();
+}
+if ($db) {
   echo "Ah Ja!<br>";
 }
-$adr=new Address("Rapperbahn 1", '20888', "Hamburg");
-$c=new Customer('Rudi','Ratlos', clone($adr));
+$adr = new Address("Rapperbahn 1", '20888', "Hamburg");
+$c = new Customer('Rudi', 'Ratlos', clone($adr));
+$lbl = new Label("CatHaters");
+$p = new Product("Katzenhaardecke", "CAT0815", "7324234.30", clone($lbl));
 $c->insert($db);
-$adrC=$c->address();
+$p->insert($db);
+$customerData = Customer::find($db, 'Knut');
+var_dump($customerData);
+$productData = Product::find($db, 'Katzenhaardecke');
+var_dump($productData);
+$adrC = $c->address();
+$lblP = $p->formatedProduct();
+echo $lblP;
 //var_dump($adrC);
-echo "Der Kunde ".$c->firstName()." ".$c->lastName()." wohnt in:<br>".$adrC->street();
-echo "<br>".$adrC->zip();
-echo " ".$adrC->city();
-echo "<br>".$adrC->addressLine();
-$completeAdr=nl2br($c->formatedAddress());
+echo "Der Kunde " . $c->firstName() . " " . $c->lastName() . " wohnt in:<br>" . $adrC->street();
+echo "<br>" . $adrC->zip();
+echo " " . $adrC->city();
+echo "<br>" . $adrC->addressLine();
+$completeAdr = nl2br($c->formatedAddress());
 
-echo "<br>".$completeAdr;
+echo "<br>" . $completeAdr;
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,36 +63,15 @@ echo "<br>".$completeAdr;
                     </label>
                     <label for="lastName">Nachname<br>
                         <input type="text" name="lastName" id="lastName">
-                    </label>
-                    <!--label for="streetName">Straße und Hausnummer<br>
-                        <input type="text" name="steetName" id="streetName">
-                    </label>
-                    <label for="cityName">Ort<br>
-                        <input type="text" name="cityName" id="cityName">
-                    </label>
-                    <label for="email">Email<br>
-                        <input type="text" name="email" id="email">
-                    </label>
-                    <label for="phone">Telefon<br>
-                        <input type="text" name="phone" id="phone">
-                    </label>
-                    <label for="socMed1">Social Media 1<br>
-                        <input type="text" name="socMed1" id="socMed1">
-                    </label>
-                    <label for="socMed2">Social Media 2<br>
-                        <input type="text" name="socMed2" id="socMed2">
-                    </label>
-                    <label for="notice">Anmerkungen<br>
-                        <textarea name="notice" id="notice"></textarea>
-                    </label-->
+                    </label>                    
                     <button class="btn btn-outline-info" id="insert">Eintragen</button>                    
                 </div>                
             </div>
         </div>
-        <?php          
+        <?php
         ?>
         <script>
-          
+
         </script>
     </body>
 </html>
