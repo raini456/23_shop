@@ -4,6 +4,7 @@ class Product {
   private $productnr;
   private $productprice;
   private $label;
+  private $labelID;
   private static $amount;
   private $db;
 
@@ -11,6 +12,7 @@ class Product {
   $this->productname($productname);
   $this->productnr($productnr);
   $this->productprice($productprice);
+  var_dump($this->productprice);
   $this->label=$label;
  }
 
@@ -23,18 +25,23 @@ class Product {
 
  public function insert(DbClassExt $db) {
   $this->db = $db;
-  $id = $this->addLabel(); //$cid = lastid
-  $this->addProduct($id);
+  $this->labelID = $this->addLabel(); //$cid = lastid 
+  
+  $this->addProduct();
  }
 
- private function addProduct($id) {
+ private function addProduct() {
   $this->db->setTable('tb_products');
   $data = [];
   //$data[columnName] = value
-  $data['labelid'] = $id;
+  $data['labelid'] = $this->labelID;
+//  var_dump($data['labelid']);
   $data['name'] = $this->productname();
+//  var_dump($data['name']);
   $data['price'] = $this->productprice();
-  $data['poductnr']=$this->productnr();
+//  var_dump($data['price']);
+  $data['productnr']=$this->productnr();
+//  var_dump($data['productnr']);
   return $this->db->insert($data); //return lastID
  }
 
@@ -73,14 +80,14 @@ class Product {
   if ($param === NULL) {
    return $this->productprice;
   }
-  $productprice= filter_var($param, FILTER_SANITIZE_NUMBER_FLOAT);
-  if (is_string($productprice)) {
+  $productprice= filter_var($param, FILTER_VALIDATE_FLOAT);
+  if (is_float($productprice)) {
    $this->productprice = $productprice;
   }
  } 
 
  public function formatedProduct() {
-  return sprintf("%s %s\n%s\n%s", $this->productname(), $this->productprice(), $this->label->label(), $this->productnr());
+  return sprintf("%s\n%s\n%s\n%s", $this->productname(), $this->productprice(), $this->label->label(), $this->productnr());
  
   
  }

@@ -13,29 +13,31 @@ try {
   echo $exc->getTraceAsString();
 }
 if ($db) {
-  echo "Ah Ja!<br>";
+  echo "Connected!<br>";
 }
 $adr = new Address("Rapperbahn 1", '20888', "Hamburg");
 $c = new Customer('Rudi', 'Ratlos', clone($adr));
-$lbl = new Label("CatHaters");
-$p = new Product("Katzenhaardecke", "CAT0815", "7324234.30", clone($lbl));
+$lbl = new Label("Happy Backside");
+$p = new Product("Rückenkratzer", "SCRATCH2000", 2.50, clone($lbl));
 $c->insert($db);
 $p->insert($db);
-$customerData = Customer::find($db, 'Knut');
-var_dump($customerData);
-$productData = Product::find($db, 'Katzenhaardecke');
-var_dump($productData);
+$customerData = Customer::find($db, 'Rudi');
+//var_dump($customerData);
+echo "<br>";
+$productData = Product::find($db, 'CAT0815');
+//var_dump($productData);
+echo "<br>";
 $adrC = $c->address();
-$lblP = $p->formatedProduct();
+$lblP = nl2br($p->formatedProduct());
 echo $lblP;
 //var_dump($adrC);
-echo "Der Kunde " . $c->firstName() . " " . $c->lastName() . " wohnt in:<br>" . $adrC->street();
-echo "<br>" . $adrC->zip();
-echo " " . $adrC->city();
-echo "<br>" . $adrC->addressLine();
-$completeAdr = nl2br($c->formatedAddress());
-
-echo "<br>" . $completeAdr;
+//echo "Der Kunde " . $c->firstName() . " " . $c->lastName() . " wohnt in:<br>" . $adrC->street();
+//echo "<br>" . $adrC->zip();
+//echo " " . $adrC->city();
+//echo "<br>" . $adrC->addressLine();
+//$completeAdr = nl2br($c->formatedAddress());
+//
+//echo "<br>" . $completeAdr;
 ?>
 <!DOCTYPE html>
 <html>
