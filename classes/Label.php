@@ -1,6 +1,6 @@
 <?php
 class Label {
-  protected $labelName;
+  private $labelName;
   private static $amount = 0;
 
   public function __construct(string $labelName) {

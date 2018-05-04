@@ -12,18 +12,17 @@ try {
 } catch (PDOException $exc) {
   echo $exc->getTraceAsString();
 }
-if ($db) {
-  echo "Connected!<br>";
+if (!$db) {
+  echo "Connection failed!<br>";
 }
 $adr = new Address("Rapperbahn 1", '20888', "Hamburg");
 $c = new Customer('Rudi', 'Ratlos', clone($adr));
-$lbl = new Label("Happy Backside");
-$p = new Product("Rückenkratzer", "SCRATCH2000", 2.50, clone($lbl));
+$lbl = new Label("JetsetGoods");
+$p = new Product("Gummilatschen", "PLAST8778783", 0.49, clone($lbl));
 $c->insert($db);
 $p->insert($db);
 $customerData = Customer::find($db, 'Rudi');
 //var_dump($customerData);
-echo "<br>";
 $productData = Product::find($db, 'CAT0815');
 //var_dump($productData);
 echo "<br>";

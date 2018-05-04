@@ -3,16 +3,14 @@ class Product {
   private $productname;
   private $productnr;
   private $productprice;
-  private $label;
-  private $labelID;
+  private $label;  
   private static $amount;
   private $db;
 
  public function __construct(string $productname, string $productnr, float $productprice, Label $label) {
   $this->productname($productname);
   $this->productnr($productnr);
-  $this->productprice($productprice);
-  var_dump($this->productprice);
+  $this->productprice($productprice);  
   $this->label=$label;
  }
 
@@ -25,29 +23,24 @@ class Product {
 
  public function insert(DbClassExt $db) {
   $this->db = $db;
-  $this->labelID = $this->addLabel(); //$cid = lastid 
+  $labelID = $this->addLabel(); //$cid = lastid 
   
-  $this->addProduct();
+  $this->addProduct($labelID);
  }
 
- private function addProduct() {
+ private function addProduct($id) {
   $this->db->setTable('tb_products');
-  $data = [];
-  //$data[columnName] = value
-  $data['labelid'] = $this->labelID;
-//  var_dump($data['labelid']);
+  $data = [];  
+  $data['labelid'] = $id;
   $data['name'] = $this->productname();
-//  var_dump($data['name']);
   $data['price'] = $this->productprice();
-//  var_dump($data['price']);
   $data['productnr']=$this->productnr();
-//  var_dump($data['productnr']);
   return $this->db->insert($data); //return lastID
  }
 
  private function addLabel() {
-  $this->db->setTable('tb_labels');
-  $data = [];  
+  $this->db->setTable('tb_labels'); 
+  $data = [];    
   $data['label'] = $this->label->label();  
   return $this->db->insert($data); //return lastID
  }
