@@ -8,7 +8,7 @@ require_once './classes/Product.php';
 require_once './classes/Label.php';
 
 try {
-  $db = new DbClassExt('mysql:host=' . HOST . ';dbname=' . DB, USER, PASSWORD);  
+  $db = new DbClassExt('mysql:host=' . HOST . ';dbname=' . DB, USER, PASSWORD);
 } catch (PDOException $exc) {
   echo $exc->getTraceAsString();
 }
@@ -22,10 +22,7 @@ $p = new Product("Gummilatschen", "PLAST8778783", 0.49, clone($lbl));
 $c->insert($db);
 $p->insert($db);
 $customerData = Customer::find($db, 'Rudi');
-//var_dump($customerData);
 $productData = Product::find($db, 'CAT0815');
-//var_dump($productData);
-echo "<br>";
 $adrC = $c->address();
 $lblP = nl2br($p->formatedProduct());
 echo $lblP;
@@ -53,17 +50,46 @@ echo $lblP;
     </head>
     <body>
         <div class="container">
+            <h1>Shop</h1>
             <div class="row">                
                 <div class="col-12 col-lg-10 col-md-10 col-sm-10 col-xl-10 bg-light pt-5 pb-5">
-                    <h2>Shop</h2>
+                    <h2>Eintrag Kunde</h2>
                     <hr>
                     <div id="output">Kundenname</div>
                     <hr>
                     <label for="firstName">Vorname<br>
                         <input type="text" name="firstName" id="firstName">
                     </label>
-                    <label for="lastName">Nachname<br>
-                        <input type="text" name="lastName" id="lastName">
+                    <label for="firstName">Nachname<br>
+                        <input type="text" name="nachName" id="nachName">
+                    </label>
+                    <label for="street">Straße/Hausnummer<br>
+                        <input type="text" name="street" id="street">
+                    </label> 
+                    <label for="city">Ort<br>
+                        <input type="text" name="city" id="city">
+                    </label>                    
+                    <button class="btn btn-outline-info" id="insert">Eintragen</button>                    
+                </div>                
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-10 col-md-10 col-sm-10 col-xl-10 bg-light pt-5 pb-5">
+                    <h2>Eintrag Produkt</h2>                                   
+                    <hr>
+                    <div id="output1">Produktname</div>
+                    <hr>
+                    <label for="productName">Produktname<br>
+                        <input type="text" name="productName" id="productName">
+                    </label>
+                    <label for="labelName">Label<br>
+                        <input type="text" name="labelName" id="labelName">
+                    </label>
+                    <label for="price">Preis<br>
+                        <input type="text" name="price" id="price">
+                    </label> 
+                    <label for="productnr">Produktnummer<br>
+                        <input type="text" name="productnr" id="productnr">
                     </label>                    
                     <button class="btn btn-outline-info" id="insert">Eintragen</button>                    
                 </div>                
