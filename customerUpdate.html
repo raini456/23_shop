@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>23_Shop_Update_Customer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="assets/css/styles.css"> 
+        <script src="assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="assets/js/ajax.js" type="text/javascript"></script>
+        <script src="assets/js/main.js" type="text/javascript"></script>
+
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="row">                
+                <div class="col bg-light pt-5 pb-5">                    
+                    <h2>Änderung Kundendaten</h2><hr>
+                    <form>
+                        <div class="form-group">
+                            <h3><label for="selectCustomers">Bisheriger Eintrag</label></h3>
+                            <select class="form-control" name="selectCustomers" id="selectCustomers"></select>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="firstName">Vorname<br>
+                                <input type="text" class="form-control" name="firstName" id="firstName">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nachname<br>
+                                <input type="text" class="form-control" name="lastName" id="lastName">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="street">Straße/Hausnummer<br>
+                                <input type="text" class="form-control" name="street" id="street">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">Postleitzahl<br>
+                                <input type="number" class="form-control" name="zip" id="zip">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Ort<br>
+                                <input type="text" class="form-control" name="city" id="city">
+                            </label>
+                        </div>
+                        <hr>
+                        <h4>Geplante Änderung</h4>
+                        <div id="output">....</div>
+                        <hr>                    
+                        <button class="btn btn-outline-info" id="insert">Eintragen</button>
+                    </form>                    
+                </div>                
+            </div>
+
+            <div class="row">
+                <div class="col bg-light pt-5 pb-5">
+                    <h2>Änderung Produkdaten</h2>
+                    <hr>
+                    <form>
+                        <div class="form-group">
+                            <h3><label for="selectProducts">Bisheriger Eintrag</label></h3>
+                            <select class="form-control" name="selectProducts" id="selectProducts"></select>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="productName">Produktname<br>
+                                <input type="text" class="form-control" name="productName" id="productName">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="labelName">Label<br>
+                                <input type="text" class="form-control" name="labelName" id="labelName">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Preis<br>
+                                <input type="text" class="form-control" name="price" id="price">
+                            </label> 
+                        </div>
+                        <div class="form-group">
+                            <label for="productnr">Produktnummer<br>
+                                <input type="text" class="form-control" name="productnr" id="productnr">
+                            </label> 
+                        </div>
+                        <div id="output1">Geplante Produktänderung</div>
+                        <hr>                   
+                        <button class="btn btn-outline-info" id="insert">Eintragen</button>                    
+                    </form>
+                </div>                
+            </div>
+        </div>
+        <?php
+        ?>
+                <script></script>
+    </body>
+</html>

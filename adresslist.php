@@ -49,49 +49,76 @@
                     </label><br>
                     <label for="notice">Anmerkungen<br>
                         <textarea name="notice" id="notice"></textarea>
+                    </label>                    
+                </div>  
+            </div>
+            <div class="row"
+                <div class="col-12 col-lg-10 col-md-10 col-sm-10 col-xl-10">
+                    <label for="checkData">Dein Eintrag<br>
+                        <p name="checkData" id="checkData">lökök</p>
                     </label><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-10 col-md-10 col-sm-10 col-xl-10 bg-light pt-5 pb-5">
                     <button class="btn btn-outline-info" id="btnInsert">Eintragen</button>                    
-                </div>                
+                </div>
             </div>
         </div>
-        <script>
-          (function () {
-              var firstName, lastName, birthday, streetName, cityName, email, phone, socMedia1, socMedia2, notice, btnInsert;
-              firstName = document.querySelector('#firstName');
-              lastName = document.querySelector('#lastName');
-              birthday = document.querySelector('#birthday');
-              streetName = document.querySelector('#streetName');
-              cityName = document.querySelector('#cityName');
-              email = document.querySelector('#email');
-              phone = document.querySelector('#phone');
-              socMedia1 = document.querySelector('#socMedia1');
-              socMedia2 = document.querySelector('#socMedia2');
-              notice = document.querySelector('#notice');
-              btnInsert = document.querySelector('#btnInsert');
-              btnInsert.addEventListener('click', getData);
-              function getData(evt) {
-                  var params = {
-                      'firstName': firstName.value,
-                      'lastName': lastName.value,
-                      'birthday': birthday.value, 
-                      'streetName': streetName.value, 
-                      'cityName': cityName.value, 
-                      'email': email.value, 
-                      'phone': phone.value, 
-                      'socMedial': socMedia1.value, 
-                      'socMedia2': socMedia2.value, 
-                      'notice': notice.value
-                  };
-                  console.log(params);
+    </div>
+    <script>
+      (function () {
+          var firstName, lastName, birthday, streetName, cityName, email, phone, socMedia1, socMedia2, notice, btnInsert, checkData;
+          firstName = document.querySelector('#firstName');
+          lastName = document.querySelector('#lastName');
+          birthday = document.querySelector('#birthday');
+          streetName = document.querySelector('#streetName');
+          cityName = document.querySelector('#cityName');
+          email = document.querySelector('#email');
+          phone = document.querySelector('#phone');
+          socMedia1 = document.querySelector('#socMedia1');
+          socMedia2 = document.querySelector('#socMedia2');
+          notice = document.querySelector('#notice');
+          btnInsert = document.querySelector('#btnInsert');
+          checkData = document.querySelector('#checkData');
+          btnInsert.addEventListener('click', getData){
+            
+            return getData;
+          };
+          function getData(evt) {
+              var params = {
+                  'firstName': firstName.value,
+                  'lastName': lastName.value,
+                  'birthday': birthday.value,
+                  'streetName': streetName.value,
+                  'cityName': cityName.value,
+                  'email': email.value,
+                  'phone': phone.value,
+                  'socMedial': socMedia1.value,
+                  'socMedia2': socMedia2.value,
+                  'notice': notice.value
+              };
+              console.log(params);
 //                  ajax('get', 'checkCity.php', params, evalCity);
 //                  console.log(this.value);
-              }
+              return params;
+          }
+          var string1 = "";
+
+
+for (var assoc in params) {
+  string = string + params[assoc]+"<br>";
+}
+
+console.log(string);
+// expected output: "123"
+
 //              for (var i = 0; i < btns.length; i++) {
 //                  //var btn[i] = document.querySelector('button'); //ermöglicht die Verwendung von CSS-Selektoren wie # und .
 //
 //                  btns[i].addEventListener('click', ajaxPost);
 //              }              
-          })();
-        </script>
-    </body>
+      })();
+    </script>
+</body>
 </html>

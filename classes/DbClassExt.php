@@ -31,7 +31,10 @@ class DbClassExt extends DbClass {
  public function setStatement(string $st) {
   $this->statement = $st;
  }
-
+/**
+ * //hier kann man auch mit Aliasen arbeiten: C.id AS ID usw
+ * 
+ */
  public function setColumns(string $cols) {
   $this->columns = $cols;
  }

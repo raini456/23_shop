@@ -3,7 +3,11 @@
 class DbClass extends PDO {
 
  protected $tableName = '';
-
+/**
+ * entweder übergabe des Tabellennames tb_addresses z.B. oder aber
+ * als ALIAS mit tb_addresses AS A, bzw. tb_addresses A
+ * @param string tableName tb_
+ */
  public function setTable($tn) {   
   $this->tableName = $tn;
  }

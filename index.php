@@ -16,7 +16,7 @@ if (!$db) {
   echo "Connection failed!<br>";
 }
 $adr = new Address("Rapperbahn 1", '20888', "Hamburg");
-$c = new Customer('Rudi', 'Ratlos', clone($adr));
+$c = new Customer('Susi', 'Sorglos', clone($adr));
 $lbl = new Label("JetsetGoods");
 $p = new Product("Gummilatschen", "PLAST8778783", 0.49, clone($lbl));
 $c->insert($db);
@@ -54,6 +54,7 @@ echo $lblP;
             <div class="row">                
                 <div class="col-12 col-lg-10 col-md-10 col-sm-10 col-xl-10 bg-light pt-5 pb-5">
                     <h2>Eintrag Kunde</h2>
+                    <select></select>
                     <hr>
                     <div id="output">Kundenname</div>
                     <hr>
@@ -66,6 +67,9 @@ echo $lblP;
                     <label for="street">Straße/Hausnummer<br>
                         <input type="text" name="street" id="street">
                     </label> 
+                    <label for="zip">Postleitzahl<br>
+                        <input type="number" name="zip" id="zip">
+                    </label>
                     <label for="city">Ort<br>
                         <input type="text" name="city" id="city">
                     </label>                    
